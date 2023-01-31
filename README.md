@@ -1,1 +1,3 @@
-# learn_hydra_zen
+# Learn Hydra Zen
+Will use this repo as a sandbox to experiment using `hydra-zen`
+
