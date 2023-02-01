@@ -28,6 +28,24 @@ Will use this repo as a sandbox to experiment using `hydra-zen`
   * [ ] control which data to use
   * [ ] control what data to plot
 
+# Working directory
+
+Still trying to get my head around how the directory situation is/needs to be handled. [Here ](https://mit-ll-responsible-ai.github.io/hydra-zen/how_to/using_scikit_learn.html#id1)is one example that has the `hydra-zen` code in a subfolder yet the artifacts from having run the code are saved to `/outputs/` or `/multirun/`
+
+```python
+if __name__ == "__main__":  
+    from hydra.conf import HydraConf, JobConf
+    # Configure Hydra to change the working dir to
+    # match that of the output dir
+    store(HydraConf(job=JobConf(chdir=True)), name="config", group="hydra")
+```
+
+[Reference ](https://hydra.cc/docs/upgrades/1.1_to_1.2/changes_to_job_working_dir/)from Hydra
+
+# Learning to use `hydra_zen.ZenStore()`
+
+[docs](https://mit-ll-responsible-ai.github.io/hydra-zen/generated/hydra_zen.ZenStore.html)
+
 # scikit_learn_howto
 
 Following [this](https://mit-ll-responsible-ai.github.io/hydra-zen/how_to/using_scikit_learn.html) guide.
