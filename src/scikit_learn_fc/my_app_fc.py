@@ -1,6 +1,12 @@
 """
 following
     https://mit-ll-responsible-ai.github.io/hydra-zen/how_to/using_scikit_learn.html#configuring-and-building-an-experiment
+    
+to run all experiments via CLI use
+$ python my_app.py "dataset=glob(*)" "classifier=glob(*)" --multirun
+ehhhh in my specific case use:
+$ python src/scikit_learn_fc/my_app_fc.py "dataset=glob(*)" "classifier=glob(*)" --multirun
+
 """
 
 
@@ -195,9 +201,14 @@ def task(
 if __name__ == "__main__":
     from hydra_zen import zen
     from hydra.conf import HydraConf, JobConf
-    # Configure Hydra to change the working dir to
-    # match that of the output dir
+    # Configure Hydra to change the working dir to match that of the output dir
     store(HydraConf(job=JobConf(chdir=True)), name="config", group="hydra")
 
+    # Add all of the configs, that we put in hydra-zen's (local) config store,
+    # to Hydra's (global) config store.
     store.add_to_hydra_store(overwrite_ok=True)
+
+    # Use `zen()` to convert our Hydra-agnostic task function into one that is
+    # compatible with Hydra.
+    # Use `.hydra_main(...)` to generate the Hydra-compatible CLI for our program.
     zen(task).hydra_main(config_path=None, config_name="config", version_base="1.2")

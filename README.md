@@ -66,7 +66,7 @@ python src/scikit_learn_howto/plotter.py
 
 These two scripts are meant to be run in tandom, that is, if you run the experiment code multiple times, the plotter will likely not work. In this case, the easy fix is to delete the multirun folder and start the experiments over again.
 
-If succeful, you should see the following plot:
+If successful, you should see the following plot:
 
 ![1675139723253](image/README/1675139723253.png)
 
