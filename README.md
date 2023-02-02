@@ -13,12 +13,12 @@ Will use this repo as a sandbox to experiment using `hydra-zen`
 
 * [ ] hydra store
 
-  * [ ] save something to the store in one `.py` file, and then use it in another
+  * [X] save something to the store in one `.py` file, and then use it in another
   * [ ] what the heck is going on in the `if __name__ == '__main__'` section of example code?
-    * [ ] is this how the datasets and model classes actually get saved to the store?
+    * [X] is this how the datasets and model classes actually get saved to the store?
     * [ ] What's the deal with `version_base`?
-  * [ ] `hydra_zen.store()` vs `hydra_zen.ZenStore.add_to_hydra_store`
-  * [ ] how do I clear the store?
+  * [X] `hydra_zen.store()` vs `hydra_zen.ZenStore.add_to_hydra_store`
+  * [X] how do I clear the store?
 * [ ] how do I experiment
 
   * [ ] control which models to use
@@ -28,7 +28,7 @@ Will use this repo as a sandbox to experiment using `hydra-zen`
   * [ ] control which data to use
   * [ ] control what data to plot
 
-# View info from CLI
+# View config info via CLI
 
 To view the same contents as what will appear in `/outputs/*/*/.hydra/config.yaml` you can run
 
@@ -37,6 +37,10 @@ python my_app.py --info
 ```
 
 where we have used the `--info` flag
+
+# Rerunning Experiments
+
+...
 
 # Working directory
 
