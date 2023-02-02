@@ -28,6 +28,16 @@ Will use this repo as a sandbox to experiment using `hydra-zen`
   * [ ] control which data to use
   * [ ] control what data to plot
 
+# View info from CLI
+
+To view the same contents as what will appear in `/outputs/*/*/.hydra/config.yaml` you can run
+
+```shell
+python my_app.py --info
+```
+
+where we have used the `--info` flag
+
 # Working directory
 
 Still trying to get my head around how the directory situation is/needs to be handled. [Here ](https://mit-ll-responsible-ai.github.io/hydra-zen/how_to/using_scikit_learn.html#id1)is one example that has the `hydra-zen` code in a subfolder yet the artifacts from having run the code are saved to `/outputs/` or `/multirun/`
