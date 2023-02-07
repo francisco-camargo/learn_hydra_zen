@@ -23,7 +23,7 @@ Will use this repo as a sandbox to experiment using `hydra-zen`
 
   * [ ] control which models to use
     * [ ] control which hyperparameters to use
-    * [ ] control a gridsearchCV run
+    * [ ] control a GridSearchCV run
     * [ ] control a run over a specified list of values for a hyperparameter
   * [ ] control which data to use
   * [ ] control what data to plot
@@ -37,6 +37,14 @@ python my_app.py --info
 ```
 
 where we have used the `--info` flag
+
+Can view the configurable aspects of our application using the `--help` command
+
+```shell
+python my_app.py --help
+```
+
+This tells us the fields that the app requires
 
 # Rerunning Experiments
 
@@ -56,9 +64,29 @@ if __name__ == "__main__":
 
 [Reference ](https://hydra.cc/docs/upgrades/1.1_to_1.2/changes_to_job_working_dir/)from Hydra
 
-# Learning to use `hydra_zen.ZenStore()`
+# Learning to use `hydra_zen.store()`
 
 [docs](https://mit-ll-responsible-ai.github.io/hydra-zen/generated/hydra_zen.ZenStore.html)
+
+There are multiple ways to end up with configs
+
+1. Without the `store()`
+   1. Use `make_config()` which is then fed to `launch()`, [link](https://mit-ll-responsible-ai.github.io/hydra-zen/tutorials/basic_app.html)
+   2. Use `builds()` on a function (or object?) and is then fed to `launch()`, [link](https://mit-ll-responsible-ai.github.io/hydra-zen/tutorials/basic_app.html)
+2. With the `store()`,
+   1. Add config to `store()` using a function decorator, [link](https://mit-ll-responsible-ai.github.io/hydra-zen/tutorials/add_cli.html)
+   2. Add config to `store()` while using groups and then add "parent" config with `store(make_config())`, [link](https://mit-ll-responsible-ai.github.io/hydra-zen/how_to/using_scikit_learn.html)
+   3. Always end with `store.add_to_hydra_store()` (which adds local store to global store)?
+
+# Launching application
+
+There are multiple ways to launch an application
+
+1. Execute `launch()`, [link](https://mit-ll-responsible-ai.github.io/hydra-zen/tutorials/basic_app.html). Feed the function a config and a task function that takes as input a config
+2. Execute `launch()`, [link](https://mit-ll-responsible-ai.github.io/hydra-zen/tutorials/basic_app.html). Feed the function a config and a `zen()` wrapped task function
+3. From CLI
+   1. Use `hydra_main()` method of a `zen()` wrapped task function to enable CLI usage, [link](https://mit-ll-responsible-ai.github.io/hydra-zen/tutorials/add_cli.html)
+   2. 
 
 # scikit_learn_howto
 
@@ -78,7 +106,7 @@ To run plotter code in CLI
 python src/scikit_learn_howto/plotter.py
 ```
 
-These two scripts are meant to be run in tandom, that is, if you run the experiment code multiple times, the plotter will likely not work. In this case, the easy fix is to delete the multirun folder and start the experiments over again.
+These two scripts are meant to be run in tandem, that is, if you run the experiment code multiple times, the plotter will likely not work. In this case, the easy fix is to delete the multirun folder and start the experiments over again.
 
 If successful, you should see the following plot:
 

@@ -11,7 +11,6 @@ to use default options
 to run with desired overrides
 $ python src\scikit_learn_fc\hydra_runner.py "dataset=circles" "classifier=decision_tree"
 
-
 to run all experiments use
 $ python src\scikit_learn_fc\hydra_runner.py "dataset=glob(*)" "classifier=glob(*)" --multirun
 
