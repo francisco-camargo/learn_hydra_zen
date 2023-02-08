@@ -24,19 +24,25 @@ CharConf = builds(Character, inventory=starter_gear, populate_full_signature=Tru
     # need populate_full_signature=True because Character is an Class... I think
     # think it was not needed for inventory because inventory is a dictionary
 
-# Generate and store a top-level config specifying `CharConf` as the
-# default config for `player`
-@store(name="my_app", player=CharConf)
+player_store = store(group="player") # define config group
+player_store(CharConf, name="base") # define default for "player" config group
+
+# Task function
 def task_function(player: Character):
-
     print(player)
-
     with open("player_log.txt", "a") as f:
         f.write("Game session log:\n")
         f.write(f"Player: {player}\n")
-
     return player
 
+# Add top-level config to store
+store(
+    make_config(
+        hydra_defaults=["_self_", {"player":"base"}],
+        player=None,
+    ),
+    name="my_app",
+)
 
 if __name__ == "__main__":
     store.add_to_hydra_store()
@@ -48,7 +54,7 @@ if __name__ == "__main__":
     # from hydra_zen import launch, zen
     # from my_app import task_function
     # from my_app import CharConf
-    # # store.add_to_hydra_store(overwrite_ok=True)
+    # store.add_to_hydra_store(overwrite_ok=True)
     # job = launch(
     #     CharConf,
     #     zen(task_function),
