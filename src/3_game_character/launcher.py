@@ -17,12 +17,15 @@ frodo, lvl: 2, has: {'gold': 10, 'weapon': 'stick', 'costume': 'robe'}
 
 """
 
-from hydra_zen import launch
+# TODO: broken at the moment
+
+from hydra_zen import launch, zen
 from my_app import task_function
 from my_app import CharConf
 job = launch(
     CharConf,
-    task_function,
-    ["player.name=frodo", "player.level=2", "player.inventory.costume=robe"],
+    zen(task_function),
+    overrides=["player.name=frodo"],
+    version_base='1.1'
 )
 # frodo, lvl: 2, has: {'gold': 10, 'weapon': 'stick', 'costume': 'robe'}

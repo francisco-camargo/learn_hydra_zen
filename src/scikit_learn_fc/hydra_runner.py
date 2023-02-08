@@ -19,7 +19,6 @@ $ python src\scikit_learn_fc\hydra_runner.py "dataset=glob(*)" "classifier=glob(
 import add_classifiers_to_store
 import add_datasets_to_store
 from hydra_zen import make_config, store
-from train_models import task
 
 # Define and save all classifiers of interest to the local hydra-zen store
 add_classifiers_to_store.all_classifiers()
@@ -43,6 +42,7 @@ store(
 if __name__ == "__main__":
     from hydra_zen import zen
     from hydra.conf import HydraConf, JobConf
+    from train_models import task
     # Configure Hydra to change the working dir to match that of the output dir
     store(HydraConf(job=JobConf(chdir=True)), name="config", group="hydra")
 

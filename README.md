@@ -19,6 +19,10 @@ Will use this repo as a sandbox to experiment using `hydra-zen`
     * [ ] What's the deal with `version_base`?
   * [X] `hydra_zen.store()` vs `hydra_zen.ZenStore.add_to_hydra_store`
   * [X] how do I clear the store?
+* [ ] Tutorial: Design a Hierarchical Interface for an Application
+
+  * [ ] Run without decorator
+  * [ ] Run using `launch()`
 * [ ] how do I experiment
 
   * [ ] control which models to use
@@ -64,6 +68,15 @@ if __name__ == "__main__":
 
 [Reference ](https://hydra.cc/docs/upgrades/1.1_to_1.2/changes_to_job_working_dir/)from Hydra
 
+# Making configs
+
+hello
+
+1. `hydra_zen.make_config`
+2. `hydra_zen.builds()`
+3. Implicitly via `@store` decorator
+4. `hydra_zen.make_custom_builds_fn()`
+
 # Learning to use `hydra_zen.store()`
 
 [docs](https://mit-ll-responsible-ai.github.io/hydra-zen/generated/hydra_zen.ZenStore.html)
@@ -72,9 +85,10 @@ There are multiple ways to end up with configs
 
 1. Without the `store()`
    1. Use `make_config()` which is then fed to `launch()`, [link](https://mit-ll-responsible-ai.github.io/hydra-zen/tutorials/basic_app.html)
-   2. Use `builds()` on a function (or object?) and is then fed to `launch()`, [link](https://mit-ll-responsible-ai.github.io/hydra-zen/tutorials/basic_app.html)
+   2. Use `builds()` on a function or object, and is then fed to `launch()`, [link](https://mit-ll-responsible-ai.github.io/hydra-zen/tutorials/basic_app.html)
 2. With the `store()`,
    1. Add config to `store()` using a function decorator, [link](https://mit-ll-responsible-ai.github.io/hydra-zen/tutorials/add_cli.html)
+      1. How to I access the config so that I can use `launch()`? At the moment it seems like if I use the decorator, I have to run the app via the CLI
    2. Add config to `store()` while using groups and then add "parent" config with `store(make_config())`, [link](https://mit-ll-responsible-ai.github.io/hydra-zen/how_to/using_scikit_learn.html)
    3. Always end with `store.add_to_hydra_store()` (which adds local store to global store)?
 
