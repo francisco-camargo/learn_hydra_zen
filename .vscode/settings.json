@@ -6,6 +6,7 @@
         "imread",
         "mpimg",
         "multirun",
+        "nglite",
         "rakesh"
     ]
 }
