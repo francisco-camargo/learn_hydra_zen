@@ -52,7 +52,7 @@ This tells us the fields that the app requires
 
 # Rerunning Experiments
 
-...
+How do I rerun a previous experiment? What's the best way to modify a previous experiment? [link](https://mit-ll-responsible-ai.github.io/hydra-zen/how_to/configuring_experiments.html)
 
 # Working directory
 
