@@ -50,6 +50,29 @@ python my_app.py --help
 
 This tells us the fields that the app requires
 
+# Hydra CLI
+
+* Override Grammar: [link]([https://hydra.cc/docs/advanced/override_grammar/basic/](https://hydra.cc/docs/advanced/override_grammar/basic/)) and [link]([https://hydra.cc/docs/advanced/override_grammar/extended/](https://hydra.cc/docs/advanced/override_grammar/extended/))
+* CLI flags: [link]([https://hydra.cc/docs/advanced/hydra-command-line-flags/](https://hydra.cc/docs/advanced/hydra-command-line-flags/))
+* Defaults List: [link]([https://hydra.cc/docs/advanced/defaults_list/](https://hydra.cc/docs/advanced/defaults_list/))
+
+# Rerun run via CLI
+
+Running hydra applications, [link](https://hydra.cc/docs/advanced/hydra-command-line-flags/)
+
+```Python
+python my_app.py -cp outputs/2021-10-27-15-29-10/.hydra/ -cn config
+```
+
+`-cp` or `--config-path` allows for override of the path specified in `hydra_main()`
+`-cn` or `--config-name` allows for override of the config name specified in `hydra_main()`
+
+## Odd behaviour
+
+I am noticing that I can get this to work if in `hydra_main()` I specify `config_path` to be _any_ string, doesn't matter what the value of the string is, just give `config_path` a string value. Setting `config_path=None` doesn't work, nor does excluding `config_path` from the `hydra_main()` settup.
+
+Look at the top of file `src/5_experiments/my_app0.py` for more details. For the moment it seems like the move is to set `hydra_main(config_path="."`
+
 # Rerunning Experiments
 
 How do I rerun a previous experiment? What's the best way to modify a previous experiment? [link](https://mit-ll-responsible-ai.github.io/hydra-zen/how_to/configuring_experiments.html)
