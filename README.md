@@ -11,6 +11,10 @@ Will use this repo as a sandbox to experiment using `hydra-zen`
 
 # Open questions
 
+* [ ] does hydra write down the config.yaml file first, and THEN it runs zen(task) on that config file?
+
+  * [ ] if so, not clear where/when the config.yaml file gets written down
+  * [ ] is there a way that I can have just a task function and a hand-made `config.yaml`, I do `zen(task)` and everything works? ie. Do I _have_ to define a config in code?
 * [ ] hydra store
 
   * [X] save something to the store in one `.py` file, and then use it in another
@@ -72,6 +76,12 @@ python my_app.py -cp outputs/2021-10-27-15-29-10/.hydra/ -cn config
 I am noticing that I can get this to work if in `hydra_main()` I specify `config_path` to be _any_ string, doesn't matter what the value of the string is, just give `config_path` a string value. Setting `config_path=None` doesn't work, nor does excluding `config_path` from the `hydra_main()` settup.
 
 Look at the top of file `src/5_experiments/my_app0.py` for more details. For the moment it seems like the move is to set `hydra_main(config_path="."`
+
+Starting to think that `hydra_main()` looks for a config in the gloval `store` that has the name of `config_name` and also (simultaneously?) looks for a config in the folder specified by `config_path` with the name `config_name`. This means that strictly speaking, I don't need to have all the config building code if instead I happen to have a good `config.yaml` file that I can point do. I point to it via the arguments of `hydra_main()`. This means that I could choose to build config file by hand, write down the task function code, run `hydra_zen()`, and I'd be good. It does make me wonder what impact, if any, the line
+```python
+_target_: __main__.task
+```
+has on how the app runs; for the moment it seems like it's not needed...
 
 # Rerunning Experiments
 
