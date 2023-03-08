@@ -9,6 +9,8 @@ Francisco Camargo
 
 Will use this repo as a sandbox to experiment using `hydra-zen`
 
+Want to learn how to use this for _automated_ training and usage of models, but at the same time want to figure out the workflow for when I want to manually change and explore a model.
+
 # Open questions
 
 * [ ] does hydra write down the config.yaml file first, and THEN it runs zen(task) on that config file?
@@ -71,21 +73,25 @@ python my_app.py -cp outputs/2021-10-27-15-29-10/.hydra/ -cn config
 `-cp` or `--config-path` allows for override of the path specified in `hydra_main()`
 `-cn` or `--config-name` allows for override of the config name specified in `hydra_main()`
 
-## Odd behaviour
+## Trying to understand how this works
 
 I am noticing that I can get this to work if in `hydra_main()` I specify `config_path` to be _any_ string, doesn't matter what the value of the string is, just give `config_path` a string value. Setting `config_path=None` doesn't work, nor does excluding `config_path` from the `hydra_main()` settup.
 
 Look at the top of file `src/5_experiments/my_app0.py` for more details. For the moment it seems like the move is to set `hydra_main(config_path="."`
 
 Starting to think that `hydra_main()` looks for a config in the gloval `store` that has the name of `config_name` and also (simultaneously?) looks for a config in the folder specified by `config_path` with the name `config_name`. This means that strictly speaking, I don't need to have all the config building code if instead I happen to have a good `config.yaml` file that I can point do. I point to it via the arguments of `hydra_main()`. This means that I could choose to build config file by hand, write down the task function code, run `hydra_zen()`, and I'd be good. It does make me wonder what impact, if any, the line
+
 ```python
 _target_: __main__.task
 ```
+
 has on how the app runs; for the moment it seems like it's not needed...
 
-# Rerunning Experiments
+# Configure Experiments
 
-How do I rerun a previous experiment? What's the best way to modify a previous experiment? [link](https://mit-ll-responsible-ai.github.io/hydra-zen/how_to/configuring_experiments.html)
+How to maintain multiple configurations for an experiment, so that each experiment's config need only specify changes to some "master" config [link](https://mit-ll-responsible-ai.github.io/hydra-zen/how_to/configuring_experiments.html)
+
+I think this is best suitable when the code is in a "finished" state where you don't need to keep playing with values that go into the config
 
 # Working directory
 
